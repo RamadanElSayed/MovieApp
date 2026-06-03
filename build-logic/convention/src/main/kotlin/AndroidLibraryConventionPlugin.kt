@@ -20,7 +20,10 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
         }
 
         dependencies {
-            add("testImplementation", catalogLibs.findLibrary("junit").get())
+            // JUnit 5 (Jupiter) on the JUnit Platform; the launcher is required at test runtime.
+            add("testImplementation", platform(catalogLibs.findLibrary("junit-bom").get()))
+            add("testImplementation", catalogLibs.findLibrary("junit-jupiter").get())
+            add("testRuntimeOnly", catalogLibs.findLibrary("junit-platform-launcher").get())
             add("testImplementation", catalogLibs.findLibrary("kotlinx-coroutines-test").get())
             add("testImplementation", catalogLibs.findLibrary("turbine").get())
             add("testImplementation", catalogLibs.findLibrary("mockk").get())

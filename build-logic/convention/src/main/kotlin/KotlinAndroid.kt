@@ -4,6 +4,7 @@ import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.tasks.testing.Test
 import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
@@ -30,6 +31,9 @@ internal fun Project.configureKotlinAndroid(
             sourceCompatibility = JavaVersion.VERSION_17
             targetCompatibility = JavaVersion.VERSION_17
         }
+
+        // Run local unit tests on the JUnit 5 Platform (Jupiter).
+        testOptions.unitTests.all { it.useJUnitPlatform() }
     }
 
     configureKotlin()
@@ -41,6 +45,8 @@ internal fun Project.configureKotlinJvm() {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+    // Run pure-Kotlin/JVM module tests on the JUnit 5 Platform (Jupiter).
+    tasks.withType(Test::class.java).configureEach { useJUnitPlatform() }
     configureKotlin()
 }
 

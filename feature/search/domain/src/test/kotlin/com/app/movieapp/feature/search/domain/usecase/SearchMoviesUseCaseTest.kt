@@ -4,9 +4,9 @@ import com.app.movieapp.common.domain.result.Outcome
 import com.app.movieapp.feature.search.domain.model.SearchMovie
 import com.app.movieapp.feature.search.domain.repository.SearchRepository
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 
 class SearchMoviesUseCaseTest {
 
@@ -26,7 +26,7 @@ class SearchMoviesUseCaseTest {
         val result = useCase("   ")
 
         assertEquals(Outcome.Success(emptyList<SearchMovie>()), result)
-        assertTrue("repository must not be called for blank query", !repo.called)
+        assertTrue(!repo.called, "repository must not be called for blank query")
     }
 
     @Test

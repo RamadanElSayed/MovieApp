@@ -4,8 +4,8 @@ import com.app.movieapp.core.contract.preferences.AppLanguage
 import com.app.movieapp.core.contract.preferences.DynamicColor
 import com.app.movieapp.core.contract.preferences.ThemeMode
 import com.app.movieapp.core.contract.preferences.UserPreferences
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 class SettingsReducerTest {
 
