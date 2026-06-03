@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">MovieApp</string>
+    <string name="nav_movies">Movies</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_favorites">Favorites</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_back">Back</string>
+    <string name="onboarding_get_started">Get started</string>
+    <string name="onboarding_title_1">Discover great movies</string>
+    <string name="onboarding_body_1">Browse what\'s popular right now, fully up to date — fresh from TMDB.</string>
+    <string name="onboarding_title_2">Save your favorites</string>
+    <string name="onboarding_body_2">Tap the heart on any poster to build your own personal watchlist.</string>
+    <string name="onboarding_title_3">Works offline</string>
+    <string name="onboarding_body_3">Your movies stay cached on the device, so you can keep browsing without a signal.</string>
+
+    <!-- API key setup (shown when no TMDB token is configured) -->
+    <string name="setup_title">One quick setup step</string>
+    <string name="setup_subtitle">MovieApp needs a free TMDB API key to load movies. Your internet is fine — the key is just missing.</string>
+    <string name="setup_step_1">Get a v4 \"API Read Access Token\" from TMDB (free).</string>
+    <string name="setup_step_2">Add it to your local.properties file:</string>
+    <string name="setup_step_3">Rebuild and relaunch the app.</string>
+    <string name="setup_code">TMDB_ACCESS_TOKEN=your_token_here</string>
+    <string name="setup_get_key">Get a TMDB key</string>
+    <string name="setup_continue">Continue anyway</string>
+</resources>

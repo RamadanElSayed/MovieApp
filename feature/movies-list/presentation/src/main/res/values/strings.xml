@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="movies_title">Popular Movies</string>
+    <string name="movies_empty">No movies to show yet.</string>
+    <string name="movies_error">We couldn\'t load movies. Please try again.</string>
+    <string name="movies_retry">Retry</string>
+    <string name="movies_offline">You\'re offline — showing saved movies.</string>
+    <string name="movies_cat_popular">Popular</string>
+    <string name="movies_cat_now_playing">Now Playing</string>
+    <string name="movies_cat_top_rated">Top Rated</string>
+    <string name="movies_cat_upcoming">Upcoming</string>
+</resources>

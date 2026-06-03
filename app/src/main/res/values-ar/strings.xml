@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">أفلام</string>
+    <string name="nav_movies">الأفلام</string>
+    <string name="nav_search">بحث</string>
+    <string name="nav_favorites">المفضلة</string>
+    <string name="nav_settings">الإعدادات</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">تخطٍ</string>
+    <string name="onboarding_next">التالي</string>
+    <string name="onboarding_back">رجوع</string>
+    <string name="onboarding_get_started">ابدأ الآن</string>
+    <string name="onboarding_title_1">اكتشف أفلامًا رائعة</string>
+    <string name="onboarding_body_1">تصفّح الأفلام الرائجة الآن، محدّثة دائمًا من TMDB.</string>
+    <string name="onboarding_title_2">احفظ مفضّلاتك</string>
+    <string name="onboarding_body_2">اضغط على القلب في أي ملصق لإنشاء قائمة مشاهدتك الخاصة.</string>
+    <string name="onboarding_title_3">يعمل بدون إنترنت</string>
+    <string name="onboarding_body_3">تبقى أفلامك محفوظة على جهازك لتتمكن من التصفّح بدون اتصال.</string>
+
+    <!-- API key setup (shown when no TMDB token is configured) -->
+    <string name="setup_title">خطوة إعداد سريعة</string>
+    <string name="setup_subtitle">يحتاج التطبيق إلى مفتاح TMDB مجاني لتحميل الأفلام. اتصالك بالإنترنت سليم — المفتاح فقط مفقود.</string>
+    <string name="setup_step_1">احصل على \"API Read Access Token\" من الإصدار الرابع من TMDB (مجانًا).</string>
+    <string name="setup_step_2">أضِفه إلى ملف local.properties:</string>
+    <string name="setup_step_3">أعد بناء التطبيق وتشغيله.</string>
+    <string name="setup_code">TMDB_ACCESS_TOKEN=your_token_here</string>
+    <string name="setup_get_key">احصل على مفتاح TMDB</string>
+    <string name="setup_continue">المتابعة على أي حال</string>
+</resources>

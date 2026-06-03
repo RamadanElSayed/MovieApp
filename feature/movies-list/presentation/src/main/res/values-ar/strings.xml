@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="movies_title">الأفلام الرائجة</string>
+    <string name="movies_empty">لا توجد أفلام للعرض بعد.</string>
+    <string name="movies_error">تعذّر تحميل الأفلام. يرجى المحاولة مرة أخرى.</string>
+    <string name="movies_retry">إعادة المحاولة</string>
+    <string name="movies_offline">أنت غير متصل — يتم عرض الأفلام المحفوظة.</string>
+    <string name="movies_cat_popular">الرائجة</string>
+    <string name="movies_cat_now_playing">تُعرض الآن</string>
+    <string name="movies_cat_top_rated">الأعلى تقييمًا</string>
+    <string name="movies_cat_upcoming">قريبًا</string>
+</resources>

@@ -1,0 +1,54 @@
+package com.app.movieapp.core.designsystem.theme
+
+import androidx.compose.ui.graphics.Color
+
+// Cinematic brand palette: deep indigo primary with a warm amber/gold accent (tertiary).
+// Used as the static fallback whenever Material You dynamic color is unavailable/disabled.
+
+// --- Light scheme ---
+internal val md_light_primary = Color(0xFF5B3CC4)
+internal val md_light_onPrimary = Color(0xFFFFFFFF)
+internal val md_light_primaryContainer = Color(0xFFE7DEFF)
+internal val md_light_onPrimaryContainer = Color(0xFF21005D)
+internal val md_light_secondary = Color(0xFF625B71)
+internal val md_light_onSecondary = Color(0xFFFFFFFF)
+internal val md_light_secondaryContainer = Color(0xFFE8DEF8)
+internal val md_light_onSecondaryContainer = Color(0xFF1D192B)
+internal val md_light_tertiary = Color(0xFF8B5000)
+internal val md_light_onTertiary = Color(0xFFFFFFFF)
+internal val md_light_tertiaryContainer = Color(0xFFFFDDB3)
+internal val md_light_onTertiaryContainer = Color(0xFF2C1600)
+internal val md_light_background = Color(0xFFFFFBFF)
+internal val md_light_onBackground = Color(0xFF1C1B1F)
+internal val md_light_surface = Color(0xFFFFFBFF)
+internal val md_light_onSurface = Color(0xFF1C1B1F)
+internal val md_light_surfaceVariant = Color(0xFFE7E0EB)
+internal val md_light_onSurfaceVariant = Color(0xFF49454F)
+internal val md_light_outline = Color(0xFF7A757F)
+internal val md_light_outlineVariant = Color(0xFFCAC4D0)
+internal val md_light_error = Color(0xFFBA1A1A)
+internal val md_light_onError = Color(0xFFFFFFFF)
+
+// --- Dark scheme (default-feeling for a movie app: near-black surfaces, luminous accents) ---
+internal val md_dark_primary = Color(0xFFB9A6FF)
+internal val md_dark_onPrimary = Color(0xFF2E1A66)
+internal val md_dark_primaryContainer = Color(0xFF45357A)
+internal val md_dark_onPrimaryContainer = Color(0xFFE7DEFF)
+internal val md_dark_secondary = Color(0xFFCBC2DB)
+internal val md_dark_onSecondary = Color(0xFF332D41)
+internal val md_dark_secondaryContainer = Color(0xFF464255)
+internal val md_dark_onSecondaryContainer = Color(0xFFE8DEF8)
+internal val md_dark_tertiary = Color(0xFFFFD08A)
+internal val md_dark_onTertiary = Color(0xFF4A2800)
+internal val md_dark_tertiaryContainer = Color(0xFF6A3C00)
+internal val md_dark_onTertiaryContainer = Color(0xFFFFDDB3)
+internal val md_dark_background = Color(0xFF121016)
+internal val md_dark_onBackground = Color(0xFFE6E1E9)
+internal val md_dark_surface = Color(0xFF121016)
+internal val md_dark_onSurface = Color(0xFFE6E1E9)
+internal val md_dark_surfaceVariant = Color(0xFF49454F)
+internal val md_dark_onSurfaceVariant = Color(0xFFCAC4D0)
+internal val md_dark_outline = Color(0xFF948F99)
+internal val md_dark_outlineVariant = Color(0xFF49454F)
+internal val md_dark_error = Color(0xFFFFB4AB)
+internal val md_dark_onError = Color(0xFF690005)

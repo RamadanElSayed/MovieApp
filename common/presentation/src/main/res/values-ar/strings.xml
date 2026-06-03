@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Centralized, localized error messages (Arabic). -->
+    <string name="error_no_connection">لا يوجد اتصال بالإنترنت. يتم عرض البيانات المحفوظة.</string>
+    <string name="error_timeout">انتهت مهلة الطلب. يرجى المحاولة مرة أخرى.</string>
+    <string name="error_unauthorized">مفتاح TMDB مفقود أو غير صالح. أضِف رمز الإصدار الرابع إلى ملف local.properties‏ (TMDB_ACCESS_TOKEN) ثم أعد البناء.</string>
+    <string name="error_not_found">تعذّر العثور على ما تبحث عنه.</string>
+    <string name="error_database">تعذّرت قراءة البيانات المحلية.</string>
+    <string name="error_server">خطأ في الخادم (%1$d). يرجى المحاولة لاحقًا.</string>
+    <string name="error_generic">حدث خطأ ما. يرجى المحاولة مرة أخرى.</string>
+    <string name="action_retry">إعادة المحاولة</string>
+</resources>

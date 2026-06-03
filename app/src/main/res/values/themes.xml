@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- AppCompat DayNight base so AppCompatActivity + per-app locales work. Compose owns the
+         actual Material 3 colors via MovieAppTheme; this is just the window/splash theme. -->
+    <style name="Theme.MovieApp" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Centralized, localized error messages (English). -->
+    <string name="error_no_connection">No internet connection. Showing saved data.</string>
+    <string name="error_timeout">The request timed out. Please try again.</string>
+    <string name="error_unauthorized">Missing or invalid TMDB API key. Add your v4 token to local.properties (TMDB_ACCESS_TOKEN) and rebuild.</string>
+    <string name="error_not_found">We couldn\'t find what you were looking for.</string>
+    <string name="error_database">Couldn\'t read local data.</string>
+    <string name="error_server">Server error (%1$d). Please try again later.</string>
+    <string name="error_generic">Something went wrong. Please try again.</string>
+    <string name="action_retry">Retry</string>
+</resources>

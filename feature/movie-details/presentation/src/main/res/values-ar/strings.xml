@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="details_title">التفاصيل</string>
+    <string name="details_retry">إعادة المحاولة</string>
+    <string name="details_rating">التقييم: %1$s</string>
+    <string name="details_overview">نظرة عامة</string>
+    <string name="details_back">رجوع</string>
+    <string name="details_favorite">المفضلة</string>
+    <string name="details_no_overview">لا يوجد وصف متاح.</string>
+</resources>

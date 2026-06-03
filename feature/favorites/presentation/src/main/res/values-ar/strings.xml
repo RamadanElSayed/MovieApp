@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="favorites_title">المفضلة</string>
+    <string name="favorites_empty">لم تقم بإضافة أي مفضلات بعد.</string>
+</resources>
