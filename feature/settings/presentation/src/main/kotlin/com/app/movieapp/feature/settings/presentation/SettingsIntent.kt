@@ -6,7 +6,6 @@ import com.app.movieapp.core.contract.preferences.DynamicColor
 import com.app.movieapp.core.contract.preferences.ThemeMode
 import com.app.movieapp.core.contract.preferences.UserPreferences
 
-/** Everything the settings screen (or its async work) can ask the ViewModel to do. */
 sealed interface SettingsIntent : Intent {
     data class PreferencesLoaded(val preferences: UserPreferences) : SettingsIntent
     data class SelectTheme(val mode: ThemeMode) : SettingsIntent

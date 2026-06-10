@@ -7,7 +7,6 @@ import com.app.movieapp.feature.movieslist.domain.model.MovieCategory
 import com.app.movieapp.feature.movieslist.domain.repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow
 
-/** Streams the paged movies for a given [MovieCategory] from the cache (offline-first). */
 class ObservePagedMoviesUseCase(
     private val repository: MoviesRepository,
 ) : FlowUseCase<MovieCategory, PagingData<Movie>> {

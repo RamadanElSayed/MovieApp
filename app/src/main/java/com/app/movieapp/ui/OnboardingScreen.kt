@@ -58,11 +58,6 @@ private val onboardingPages = listOf(
     OnboardingPage(Icons.Filled.CloudDownload, R.string.onboarding_title_3, R.string.onboarding_body_3),
 )
 
-/**
- * First-launch onboarding. A swipeable, animated three-page intro that finishes by persisting the
- * `onboardingCompleted` flag (via [onFinish]) so it is never shown again. Fully RTL-aware (uses the
- * pager's natural mirroring and start/end-agnostic centered layout).
- */
 @Composable
 fun OnboardingScreen(
     onFinish: () -> Unit,
@@ -84,9 +79,7 @@ fun OnboardingScreen(
                 ),
             ),
     ) {
-        // Gradient bleeds edge-to-edge above; content stays inside the status/nav-bar safe area.
         Column(modifier = Modifier.fillMaxSize().safeDrawingPadding()) {
-            // Skip — hidden on the last page where "Get started" takes over.
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -117,7 +110,6 @@ fun OnboardingScreen(
                 modifier = Modifier.padding(vertical = MaterialTheme.spacing.lg),
             )
 
-            // Primary action: advances, then on the final page completes onboarding.
             Button(
                 onClick = {
                     if (isLastPage) {
@@ -159,7 +151,6 @@ private fun OnboardingPageContent(page: OnboardingPage) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        // Hero icon inside a soft tonal disc.
         Box(
             modifier = Modifier
                 .size(160.dp)

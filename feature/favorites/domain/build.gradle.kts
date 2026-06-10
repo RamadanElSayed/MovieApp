@@ -1,8 +1,6 @@
 plugins {
     alias(libs.plugins.movieapp.kotlin.library)
 }
-// favorites DOMAIN — pure Kotlin. Consumes the cross-feature MovieProvider contract (to resolve
-// favourited ids into movie data) and declares its own FavoritesRepository contract.
 
 dependencies {
     api(project(":common:domain"))

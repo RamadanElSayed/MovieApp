@@ -24,33 +24,25 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.workmanager.dsl.worker
 import org.koin.dsl.module
 
-/** App-level bindings (cross-cutting singletons not owned by any feature). */
 val appModule = module {
     single<ResourceProvider> { AndroidResourceProvider(androidContext()) }
-    // WorkManager worker with constructor injection via Koin's WorkManager factory.
+
     worker { SyncWorker(androidContext(), get(), get()) }
 }
 
-/**
- * The composition root: this is the ONE place feature implementations are bound to their contracts.
- * The app never imports a feature's internals — it only assembles Koin modules. This is also where
- * cross-feature contract bindings become visible to consumers (e.g. movies-list's MovieProviderImpl
- * is now injectable into movie-details / favorites).
- */
 val allModules = listOf(
-    // core / common
     networkModule,
     databaseModule,
     commonDataModule,
     appModule,
-    // movies-list
+
     moviesDomainModule, moviesDataModule, moviesPresentationModule,
-    // movie-details
+
     movieDetailsDomainModule, movieDetailsPresentationModule,
-    // search
+
     searchDomainModule, searchDataModule, searchPresentationModule,
-    // favorites
+
     favoritesDomainModule, favoritesDataModule, favoritesPresentationModule,
-    // settings
+
     settingsDomainModule, settingsDataModule, settingsPresentationModule,
 )

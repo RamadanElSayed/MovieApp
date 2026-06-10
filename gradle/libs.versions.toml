@@ -1,14 +1,14 @@
 [versions]
 # Build / language
-agp = "9.0.1"
-kotlin = "2.3.21"
+agp = "9.2.1"
+kotlin = "2.4.0"
 # KSP: numbering is INDEPENDENT of Kotlin since KSP 2.3.0 (no more "<kotlin>-<ksp>").
-# For Kotlin 2.3.21 use KSP 2.3.7. (KSP1 is incompatible with Kotlin 2.3+ / AGP 9 — must be KSP2.)
+# (KSP1 is incompatible with Kotlin 2.3+ / AGP 9 — must be KSP2.)
 ksp = "2.3.7"
-# Android SDK levels are configured in build-logic (compileSdk=36, minSdk=24, targetSdk=36)
+# Android SDK levels are configured in build-logic (compileSdk=37, minSdk=24, targetSdk=36)
 
 # AndroidX core
-coreKtx = "1.18.0"
+coreKtx = "1.19.0"
 appcompat = "1.7.1"
 activityCompose = "1.13.0"
 lifecycle = "2.10.0"
@@ -53,12 +53,16 @@ workmanager = "2.11.2"
 coil = "3.4.0"
 
 # Testing
-junitJupiter = "5.14.4"
+junitJupiter = "6.1.0"
 androidxJunit = "1.3.0"
 espressoCore = "3.7.0"
 turbine = "1.2.1"
 mockk = "1.14.11"
 coroutinesTest = "1.11.0"
+
+# Static analysis
+detekt = "1.23.8"
+ktlint = "12.1.2"
 
 [libraries]
 # --- AndroidX core ---
@@ -166,6 +170,8 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 
 # Convention plugins (defined in :build-logic, applied by id across modules)
 movieapp-android-application = { id = "movieapp.android.application", version = "unspecified" }

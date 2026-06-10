@@ -8,10 +8,6 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.bind
 import org.koin.dsl.module
 
-/**
- * Presentation wiring. Registers the ViewModel and contributes this feature's [FeatureEntryProvider]
- * so `:app` can aggregate it into the single NavDisplay via Koin `getAll()`.
- */
 val moviesPresentationModule = module {
     viewModelOf(::MoviesListViewModel)
     singleOf(::MoviesEntryProvider) { bind<FeatureEntryProvider>() }

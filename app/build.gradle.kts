@@ -15,7 +15,8 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
@@ -25,18 +26,15 @@ android {
 }
 
 dependencies {
-    // ---- Core ----
     implementation(project(":core:design-system"))
     implementation(project(":core:navigation"))
     implementation(project(":core:contract"))
     implementation(project(":core:network"))
     implementation(project(":core:database"))
 
-    // ---- Common (shared modules + AndroidResourceProvider) ----
     implementation(project(":common:data"))
     implementation(project(":common:presentation"))
 
-    // ---- Features: presentation + data layers wired here (the composition root) ----
     implementation(project(":feature:movies-list:domain"))
     implementation(project(":feature:movies-list:presentation"))
     implementation(project(":feature:movies-list:data"))
@@ -52,26 +50,21 @@ dependencies {
     implementation(project(":feature:settings:presentation"))
     implementation(project(":feature:settings:data"))
 
-    // ---- Platform / UI ----
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)
 
-    // ---- Navigation 3 ----
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.navigation3.ui)
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)
 
-    // ---- DI ----
     implementation(libs.koin.androidx.compose)
     implementation(libs.koin.androidx.workmanager)
 
-    // ---- Images ----
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
 
-    // ---- Background sync ----
     implementation(libs.androidx.work.runtime.ktx)
 }

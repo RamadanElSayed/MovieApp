@@ -9,6 +9,9 @@ class SearchMoviesUseCase(
     private val repository: SearchRepository,
 ) : UseCase<String, Outcome<List<SearchMovie>>> {
     override suspend fun invoke(params: String): Outcome<List<SearchMovie>> =
-        if (params.isBlank()) Outcome.Success(emptyList())
-        else repository.searchMovies(params.trim())
+        if (params.isBlank()) {
+            Outcome.Success(emptyList())
+        } else {
+            repository.searchMovies(params.trim())
+        }
 }

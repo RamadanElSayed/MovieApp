@@ -60,19 +60,11 @@ private val topLevelDestinations = listOf(
     TopLevelDestination(Settings, Icons.Filled.Settings, R.string.nav_settings),
 )
 
-/**
- * The composition root for navigation + theming.
- *
- * - Theme + dynamic color come from the persisted [UserPreferences] (observed reactively).
- * - The back stack lives HERE (single source of truth) inside ONE [NavDisplay].
- * - Every feature's [FeatureEntryProvider] is collected from Koin (`getAll`) and installed — the app
- *   never imports a feature's screens directly.
- */
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun MovieAppRoot() {
     val preferencesRepository = koinInject<UserPreferencesRepository>()
-    // null until DataStore emits the first snapshot — avoids flashing onboarding to returning users.
+
     val preferences by preferencesRepository.preferences
         .collectAsStateWithLifecycle(initialValue = null)
 
@@ -84,7 +76,6 @@ fun MovieAppRoot() {
     ) {
         val scope = rememberCoroutineScope()
 
-        // First-launch onboarding gate: shown until the user finishes it (flag persisted in DataStore).
         if (!prefs.onboardingCompleted) {
             OnboardingScreen(
                 onFinish = { scope.launch { preferencesRepository.setOnboardingCompleted(true) } },
@@ -92,8 +83,6 @@ fun MovieAppRoot() {
             return@MovieAppTheme
         }
 
-        // Setup gate: without a TMDB key every request 401s, so guide the user to add one. They can
-        // still continue into the app. Once the key is added + rebuilt, this never shows again.
         var setupDismissed by rememberSaveable { mutableStateOf(false) }
         if (!NetworkConstants.HAS_ACCESS_TOKEN && !setupDismissed) {
             ApiKeySetupScreen(onContinue = { setupDismissed = true })
@@ -107,9 +96,6 @@ fun MovieAppRoot() {
         val showBottomBar = topLevelDestinations.any { it.key == currentTop }
 
         Scaffold(
-            // Don't consume the status-bar inset here — each screen's own Scaffold handles the top
-            // inset, which lets the details backdrop draw edge-to-edge UNDER the status bar. The
-            // bottom NavigationBar still consumes the bottom inset.
             contentWindowInsets = WindowInsets(0, 0, 0, 0),
             bottomBar = {
                 if (showBottomBar) {
@@ -119,7 +105,6 @@ fun MovieAppRoot() {
                             NavigationBarItem(
                                 selected = currentTop == dest.key,
                                 onClick = {
-                                    // Switch top-level tab: reset to that root destination.
                                     backStack.clear()
                                     backStack.add(dest.key)
                                 },
@@ -131,11 +116,6 @@ fun MovieAppRoot() {
                 }
             },
         ) { padding ->
-            // One SharedTransitionLayout around the whole NavDisplay enables shared-element morphs
-            // (e.g. a tapped poster expanding into details). The scope is published via
-            // LocalSharedTransitionScope so feature screens opt in without depending on each other.
-            // padding reserves space for the bottom bar; consumeWindowInsets marks those insets as
-            // handled so child screens' own Scaffolds don't add a SECOND bottom inset (the gap).
             SharedTransitionLayout(
                 modifier = Modifier
                     .fillMaxSize()

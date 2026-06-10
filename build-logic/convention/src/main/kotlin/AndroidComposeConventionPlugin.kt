@@ -7,15 +7,10 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 
-/**
- * Enables Jetpack Compose + Material 3 in any Android module (application or library).
- * Apply *after* a base android plugin (movieapp.android.library / .application).
- */
 class AndroidComposeConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) = with(target) {
         pluginManager.apply("org.jetbrains.kotlin.plugin.compose")
 
-        // Resolve whichever concrete Android extension this module registered.
         val commonExtension = when {
             pluginManager.hasPlugin("com.android.application") ->
                 extensions.getByType<ApplicationExtension>()

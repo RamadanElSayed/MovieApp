@@ -2,10 +2,6 @@ package com.app.movieapp.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Cinematic brand palette: deep indigo primary with a warm amber/gold accent (tertiary).
-// Used as the static fallback whenever Material You dynamic color is unavailable/disabled.
-
-// --- Light scheme ---
 internal val md_light_primary = Color(0xFF5B3CC4)
 internal val md_light_onPrimary = Color(0xFFFFFFFF)
 internal val md_light_primaryContainer = Color(0xFFE7DEFF)
@@ -29,7 +25,6 @@ internal val md_light_outlineVariant = Color(0xFFCAC4D0)
 internal val md_light_error = Color(0xFFBA1A1A)
 internal val md_light_onError = Color(0xFFFFFFFF)
 
-// --- Dark scheme (default-feeling for a movie app: near-black surfaces, luminous accents) ---
 internal val md_dark_primary = Color(0xFFB9A6FF)
 internal val md_dark_onPrimary = Color(0xFF2E1A66)
 internal val md_dark_primaryContainer = Color(0xFF45357A)

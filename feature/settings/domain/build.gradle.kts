@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.movieapp.kotlin.library)
 }
-// settings DOMAIN — pure Kotlin. Wraps the UserPreferencesRepository contract in use cases.
 
 dependencies {
     api(project(":common:domain"))

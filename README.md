@@ -8,13 +8,18 @@ Browse popular / now-playing / top-rated / upcoming movies from **TMDB**, search
 
 <br/>
 
-![Kotlin](https://img.shields.io/badge/Kotlin-2.3-7F52FF?logo=kotlin&logoColor=white)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.4-7F52FF?logo=kotlin&logoColor=white)
 ![Compose](https://img.shields.io/badge/Jetpack%20Compose-BOM%202026.05-4285F4?logo=jetpackcompose&logoColor=white)
 ![Min SDK](https://img.shields.io/badge/minSdk-24-3DDC84?logo=android&logoColor=white)
+![Compile SDK](https://img.shields.io/badge/compileSdk-37-3DDC84?logo=android&logoColor=white)
 ![Target SDK](https://img.shields.io/badge/targetSdk-36-3DDC84?logo=android&logoColor=white)
 ![Architecture](https://img.shields.io/badge/Architecture-Clean%20%2B%20MVI-FF6F00)
 ![Modules](https://img.shields.io/badge/Gradle%20Modules-23-02303A?logo=gradle&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-blue)
+
+[![CI](https://github.com/RamadanElSayed/MovieApp/actions/workflows/ci.yml/badge.svg)](https://github.com/RamadanElSayed/MovieApp/actions/workflows/ci.yml)
+![Static analysis](https://img.shields.io/badge/lint-detekt%20%2B%20ktlint-2DAA9E)
+![R8](https://img.shields.io/badge/release-R8%20minified-success)
 
 </div>
 
@@ -35,7 +40,7 @@ Browse popular / now-playing / top-rated / upcoming movies from **TMDB**, search
 6. [Module breakdown](#-module-breakdown)
 7. [Strict dependency rules](#-strict-dependency-rules)
 8. [Getting started (TMDB key + run)](#-getting-started)
-9. [Testing](#-testing)
+9. [Testing & quality](#-testing--quality)
 10. [Project structure](#-project-structure)
 
 ---
@@ -93,7 +98,9 @@ Browse popular / now-playing / top-rated / upcoming movies from **TMDB**, search
 | 🌍 | **Localization** | English & Arabic with full **RTL** mirroring |
 | 🧭 | **First-run onboarding** | Plus a guided in-app **API-key setup** screen |
 | 🔄 | **Background sync** | Periodic, connectivity-constrained refresh via WorkManager |
-| 🧪 | **Tested** | Pure reducers, use cases, mappers & `Outcome` covered by unit tests |
+| 🧪 | **Tested** | Reducers, ViewModels, repositories, use cases, mappers, `Outcome` & error mapping + a Room migration test |
+| 🛡️ | **CI & quality gates** | GitHub Actions builds, tests & lints every push; detekt + ktlint enforced |
+| 📦 | **R8 release** | Minified + resource-shrunk release build (~88% smaller APK) |
 
 ---
 
@@ -101,7 +108,7 @@ Browse popular / now-playing / top-rated / upcoming movies from **TMDB**, search
 
 | Area | Library | Version |
 |---|---|---|
-| **Language** | Kotlin (Coroutines `1.11`, Flow) | `2.3.21` |
+| **Language** | Kotlin (Coroutines `1.11`, Flow) | `2.4.0` |
 | **UI** | Jetpack Compose (BOM) · Material 3 | BOM `2026.05.01` · M3 `1.4.0` |
 | **Icons** | Material Icons Extended | `1.7.8` |
 | **Navigation** | **Navigation 3** (`navigation3` + viewmodel-nav3) | `1.1.2` |
@@ -113,8 +120,9 @@ Browse popular / now-playing / top-rated / upcoming movies from **TMDB**, search
 | **Preferences** | DataStore (Preferences) | `1.2.1` |
 | **Images** | Coil 3 (+ OkHttp network) | `3.4.0` |
 | **Background** | WorkManager | `2.11.2` |
-| **Build** | AGP · KSP · Gradle **convention plugins** | AGP `9.0.1` · KSP `2.3.7` |
-| **Testing** | JUnit4 · Turbine · MockK · coroutines-test | `4.13.2` / `1.2.1` / `1.14.11` |
+| **Build** | AGP · KSP · Gradle **convention plugins** · R8 (release) | AGP `9.2.1` · KSP `2.3.7` |
+| **Testing** | JUnit 5 (Jupiter) · Turbine · MockK · coroutines-test · Room `MigrationTestHelper` | `6.1.0` / `1.2.1` / `1.14.11` |
+| **Quality** | detekt · ktlint · GitHub Actions CI | detekt `1.23.8` · ktlint `12.1.2` |
 
 > Versions are centralized in a **Gradle Version Catalog** (`gradle/libs.versions.toml`), and cross-cutting build config lives in **`build-logic`** convention plugins (`movieapp.android.library`, `movieapp.android.compose`, `movieapp.koin`, …) so every module keeps a tiny build file.
 
@@ -357,18 +365,26 @@ TMDB_IMAGE_BASE_URL=https://image.tmdb.org/t/p/
 
 ---
 
-## 🧪 Testing
+## 🧪 Testing & quality
 
 ```bash
-./gradlew testDebugUnitTest      # all unit tests
+./gradlew testDebugUnitTest                       # all JVM unit tests
+./gradlew ktlintCheck detekt                      # static analysis (lint + style)
+./gradlew :core:database:connectedDebugAndroidTest # Room migration test (needs a device/emulator)
 ```
 
-Covered with fast, deterministic tests (JUnit4 + Turbine + MockK + coroutines-test):
+Covered with fast, deterministic tests (JUnit 5 (Jupiter) + Turbine + MockK + coroutines-test):
 
 - **Reducers** — every feature's pure state transitions (`MoviesList`, `MovieDetails`, `Search`, `Favorites`, `Settings`).
+- **ViewModels** — async error paths: refresh-failure → snackbar effect, load failure → error state, search success/failure/blank, offline state.
+- **Repositories** — cache-first reads, network fallback + caching, soft-fail refresh that never wipes the cache.
 - **Use cases** — e.g. the search blank-query short-circuit.
 - **Mappers** — `Dto → Entity → Domain → Summary` chains, URL building, null handling.
+- **Error mapping** — `safeApiCall`/`safeDbCall` HTTP-status → typed `AppError`, plus cancellation rethrow.
 - **Core types** — `Outcome` result helpers.
+- **Room migration** — `MigrationTestHelper` verifies `1 → 2` preserves favourites while rebuilding the cache tables (instrumented).
+
+**Quality gates.** [GitHub Actions](.github/workflows/ci.yml) runs ktlint + detekt, the full unit suite, a debug assembly on every push/PR, and the migration test on an emulator. **detekt** (`config/detekt/detekt.yml`) and **ktlint** (`.editorconfig`, Compose-aware) both pass with zero issues.
 
 > Pure reducers/use-cases make business logic testable **without** Android, Compose, or a device.
 

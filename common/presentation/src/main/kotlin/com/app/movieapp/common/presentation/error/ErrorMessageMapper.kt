@@ -4,10 +4,6 @@ import com.app.movieapp.common.domain.error.AppError
 import com.app.movieapp.common.presentation.R
 import com.app.movieapp.common.presentation.resource.ResourceProvider
 
-/**
- * Maps a typed [AppError] to a localized, user-facing message. Strings are resolved from resources
- * (English + Arabic), so error text is always localized and never a raw exception message.
- */
 fun AppError.toMessage(res: ResourceProvider): String = when (this) {
     AppError.Network -> res.getString(R.string.error_no_connection)
     AppError.Timeout -> res.getString(R.string.error_timeout)

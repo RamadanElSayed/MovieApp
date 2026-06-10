@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import com.app.movieapp.feature.movieslist.domain.model.MovieCategory
 import com.app.movieapp.feature.movieslist.presentation.R
 
-/** Horizontally-scrolling category selector (Popular / Now Playing / Top Rated / Upcoming). */
 @Composable
 fun CategoryTabs(
     selected: MovieCategory,
@@ -33,7 +32,7 @@ fun CategoryTabs(
     ) {
         items(MovieCategory.entries) { category ->
             val isSelected = category == selected
-            // Animate elevation so the active chip gently lifts.
+
             val elevation by animateDpAsState(if (isSelected) 4.dp else 0.dp, label = "chipElevation")
             val labelColor by animateColorAsState(
                 if (isSelected) MaterialTheme.colorScheme.onPrimary
@@ -54,7 +53,6 @@ fun CategoryTabs(
     }
 }
 
-/** Localized label for a [MovieCategory]. */
 @Composable
 private fun MovieCategory.label(): String = stringResource(
     when (this) {

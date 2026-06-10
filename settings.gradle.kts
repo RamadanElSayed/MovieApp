@@ -1,5 +1,4 @@
 pluginManagement {
-    // Build composite: the convention plugins live in :build-logic and are consumed by every module.
     includeBuild("build-logic")
     repositories {
         google {
@@ -13,6 +12,9 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+}
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -25,19 +27,16 @@ rootProject.name = "MovieApp"
 
 include(":app")
 
-// ---- Core (shared infrastructure — the innermost ring) ----
 include(":core:design-system")
 include(":core:navigation")
 include(":core:contract")
 include(":core:network")
 include(":core:database")
 
-// ---- Common (layer-specific shared code; sits ABOVE core, BELOW features) ----
 include(":common:domain")
 include(":common:data")
 include(":common:presentation")
 
-// ---- Features (each a full Clean Architecture split: domain / data / presentation) ----
 include(":feature:movies-list:domain")
 include(":feature:movies-list:data")
 include(":feature:movies-list:presentation")

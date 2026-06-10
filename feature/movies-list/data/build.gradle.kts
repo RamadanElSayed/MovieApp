@@ -9,10 +9,8 @@ android {
 }
 
 dependencies {
-    // Same-feature dependency: data implements the contracts declared in this feature's domain.
     implementation(project(":feature:movies-list:domain"))
 
-    // Layer-matched: data may use :common:data, :core:network, :core:database, :core:contract.
     implementation(project(":common:data"))
     implementation(project(":core:network"))
     implementation(project(":core:database"))

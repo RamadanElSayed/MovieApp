@@ -31,7 +31,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.app.movieapp.core.designsystem.theme.spacing
 
-/** Full-screen loading state. */
 @Composable
 fun LoadingState(modifier: Modifier = Modifier) {
     Column(
@@ -43,7 +42,6 @@ fun LoadingState(modifier: Modifier = Modifier) {
     }
 }
 
-/** Full-screen error state with an illustrative icon and a retry action. [message] is pre-localized. */
 @Composable
 fun ErrorState(
     message: String,
@@ -82,7 +80,6 @@ fun ErrorState(
     }
 }
 
-/** Full-screen empty state with a friendly icon. */
 @Composable
 fun EmptyState(message: String, modifier: Modifier = Modifier) {
     Column(
@@ -105,7 +102,6 @@ fun EmptyState(message: String, modifier: Modifier = Modifier) {
     }
 }
 
-/** Shared circular icon badge used by the empty/error states. */
 @Composable
 private fun StateIcon(
     icon: ImageVector,
@@ -125,10 +121,6 @@ private fun StateIcon(
     }
 }
 
-/**
- * Thin banner shown above stale cached content when the device is offline / a refresh failed.
- * This is the "soft failure" surface: data is still visible, with a subtle indication.
- */
 @Composable
 fun OfflineBanner(message: String, modifier: Modifier = Modifier) {
     Surface(

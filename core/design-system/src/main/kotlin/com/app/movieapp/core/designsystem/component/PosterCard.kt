@@ -30,13 +30,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
-/**
- * The single, reusable movie poster card used across Home, Search and Favorites: a 2:3 poster with
- * a bottom gradient scrim carrying the title, a rating badge and an optional favourite/remove
- * action. Centered overlays mirror correctly under RTL.
- *
- * Pass [isFavorite] + [onToggleFavorite] to show the heart toggle; leave them null to hide it.
- */
 @Composable
 fun PosterCard(
     posterUrl: String,
@@ -47,7 +40,6 @@ fun PosterCard(
     isFavorite: Boolean? = null,
     onToggleFavorite: (() -> Unit)? = null,
 ) {
-    // Subtle press feedback: the whole card scales down slightly while held.
     val interactionSource = remember { MutableInteractionSource() }
     val pressed by interactionSource.collectIsPressedAsState()
     val pressScale by animateFloatAsState(if (pressed) 0.96f else 1f, label = "pressScale")
@@ -70,7 +62,6 @@ fun PosterCard(
                 modifier = Modifier.fillMaxSize(),
             )
 
-            // Bottom scrim so the title stays legible over any poster.
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -121,7 +112,6 @@ fun PosterCard(
     }
 }
 
-/** Shimmer placeholder matching [PosterCard]'s footprint, for loading grids. */
 @Composable
 fun PosterCardPlaceholder(modifier: Modifier = Modifier) {
     Box(

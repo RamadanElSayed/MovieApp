@@ -12,11 +12,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 
-/** ConnectivityManager-backed observer that emits AVAILABLE/UNAVAILABLE as the network changes. */
 class AndroidConnectivityObserver(
     context: Context,
 ) : ConnectivityObserver {
-
     private val manager = context.getSystemService(ConnectivityManager::class.java)
 
     override val status: Flow<NetworkStatus> = callbackFlow {

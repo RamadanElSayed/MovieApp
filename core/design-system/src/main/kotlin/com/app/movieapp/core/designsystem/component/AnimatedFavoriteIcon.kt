@@ -16,10 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 
-/**
- * A heart that springs/pops when toggled and cross-fades its tint. Skips the bounce on first
- * composition so it doesn't animate just from appearing on screen.
- */
 @Composable
 fun AnimatedFavoriteIcon(
     isFavorite: Boolean,
@@ -28,7 +24,7 @@ fun AnimatedFavoriteIcon(
     modifier: Modifier = Modifier,
 ) {
     val scale = remember { Animatable(1f) }
-    // Plain holder (not snapshot state) so flipping it never triggers a recomposition.
+
     val isFirst = remember { booleanArrayOf(true) }
 
     LaunchedEffect(isFavorite) {
@@ -36,7 +32,7 @@ fun AnimatedFavoriteIcon(
             isFirst[0] = false
             return@LaunchedEffect
         }
-        // Pop out, then settle with a gentle bounce.
+
         scale.animateTo(1.35f, spring(stiffness = Spring.StiffnessHigh))
         scale.animateTo(
             1f,

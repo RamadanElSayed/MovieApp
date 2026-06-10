@@ -9,15 +9,10 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 
-/**
- * Resolves the set of favourited ids into full movie data WITHOUT depending on `feature:movies-list`
- * — it consumes the [MovieProvider] contract that movies-list implements.
- */
 class ObserveFavoriteMoviesUseCase(
     private val favoritesRepository: FavoritesRepository,
     private val movieProvider: MovieProvider,
 ) : FlowUseCase<Unit, List<MovieSummary>> {
-
     override fun invoke(params: Unit): Flow<List<MovieSummary>> =
         favoritesRepository.observeFavoriteIds().flatMapLatest { ids ->
             if (ids.isEmpty()) {

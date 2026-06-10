@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class MovieDetailsReducerTest {
-
     private val reducer = MovieDetailsReducer()
     private val initial = MovieDetailsState()
 

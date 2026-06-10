@@ -4,7 +4,6 @@ import androidx.compose.runtime.Immutable
 import com.app.movieapp.common.presentation.util.toRatingLabel
 import com.app.movieapp.feature.movieslist.domain.model.Movie
 
-/** Presentation model — shaped for display (e.g. a preformatted rating label, year, backdrop). */
 @Immutable
 data class MovieUiModel(
     val id: Int,
@@ -16,7 +15,6 @@ data class MovieUiModel(
     val isFavorite: Boolean = false,
 )
 
-/** Domain -> UI mapper (independently unit-tested). */
 fun Movie.toUi(isFavorite: Boolean = false): MovieUiModel = MovieUiModel(
     id = id,
     title = title,

@@ -55,8 +55,7 @@ import org.koin.core.parameter.parametersOf
 fun MovieDetailsRoute(
     movieId: Int,
     onBack: () -> Unit,
-    // Key the ViewModel by movieId so each movie gets its OWN instance. Without this, the shared
-    // (Activity) ViewModelStore caches the VM by type and every movie reuses the first one.
+
     viewModel: MovieDetailsViewModel = koinViewModel(key = "movie_details_$movieId") {
         parametersOf(movieId)
     },
@@ -80,7 +79,6 @@ internal fun MovieDetailsScreen(
     onToggleFavorite: () -> Unit,
 ) {
     Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        // Crossfade by PHASE (not the whole state) so favourite toggles don't re-fade the screen.
         val phase = when {
             state.isLoading -> DetailsPhase.Loading
             state.error != null -> DetailsPhase.Error
@@ -104,8 +102,6 @@ internal fun MovieDetailsScreen(
             }
         }
 
-        // Floating back button (over the backdrop). Inset below the status bar; the AutoMirrored
-        // arrow flips under RTL.
         CircleScrim(
             Modifier
                 .align(Alignment.TopStart)
@@ -132,11 +128,10 @@ private fun DetailsContent(
     Column(
         Modifier
             .fillMaxSize()
-            // Backdrop bleeds under the status bar (no top inset); keep content clear of the nav bar.
+
             .navigationBarsPadding()
             .verticalScroll(rememberScrollState()),
     ) {
-        // --- Backdrop hero, blending into the background at the bottom ---
         Box(
             Modifier
                 .fillMaxWidth()
@@ -155,7 +150,7 @@ private fun DetailsContent(
                     ),
                 ),
             )
-            // Favourite toggle, bottom-end over the backdrop.
+
             CircleScrim(Modifier.align(Alignment.BottomEnd).padding(MaterialTheme.spacing.md)) {
                 IconButton(onClick = onToggleFavorite) {
                     AnimatedFavoriteIcon(
@@ -167,7 +162,6 @@ private fun DetailsContent(
             }
         }
 
-        // --- Poster + title row, overlapping the backdrop ---
         Row(
             Modifier
                 .fillMaxWidth()
@@ -180,7 +174,7 @@ private fun DetailsContent(
                 modifier = Modifier
                     .width(110.dp)
                     .aspectRatio(2f / 3f)
-                    // Shared element: morphs from the tapped list poster (matching key).
+
                     .sharedMovieElement(moviePosterKey(movie.id)),
             ) {
                 PosterImage(url = movie.posterUrl, contentDescription = movie.title)
@@ -211,7 +205,6 @@ private fun DetailsContent(
             }
         }
 
-        // --- Overview ---
         Column(
             Modifier
                 .fillMaxWidth()
@@ -235,7 +228,6 @@ private fun DetailsContent(
     }
 }
 
-/** A circular translucent scrim so overlaid icon buttons stay tappable/legible over imagery. */
 @Composable
 private fun CircleScrim(
     modifier: Modifier = Modifier,

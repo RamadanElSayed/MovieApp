@@ -9,7 +9,6 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import java.util.concurrent.TimeUnit
 
-/** Enqueues a periodic, connectivity-constrained refresh with exponential backoff. */
 object SyncScheduler {
     private const val WORK_NAME = "movies_periodic_sync"
 

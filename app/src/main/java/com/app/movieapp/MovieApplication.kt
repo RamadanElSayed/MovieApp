@@ -15,7 +15,7 @@ class MovieApplication : Application() {
             workManagerFactory()
             modules(allModules)
         }
-        // Schedule offline-first background refresh with backoff.
+
         SyncScheduler.schedulePeriodicSync(this)
     }
 }

@@ -6,9 +6,9 @@ import com.app.movieapp.feature.movieslist.domain.usecase.RefreshMoviesUseCase
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
-/** Use-case wiring for the movies-list domain layer. */
-val moviesDomainModule = module {
-    factoryOf(::ObservePagedMoviesUseCase)
-    factoryOf(::RefreshMoviesUseCase)
-    factoryOf(::GetMovieUseCase)
-}
+val moviesDomainModule =
+    module {
+        factoryOf(::ObservePagedMoviesUseCase)
+        factoryOf(::RefreshMoviesUseCase)
+        factoryOf(::GetMovieUseCase)
+    }

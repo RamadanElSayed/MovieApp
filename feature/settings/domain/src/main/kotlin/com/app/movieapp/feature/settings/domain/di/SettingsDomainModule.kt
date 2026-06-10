@@ -7,9 +7,10 @@ import com.app.movieapp.feature.settings.domain.usecase.SetThemeModeUseCase
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
-val settingsDomainModule = module {
-    factoryOf(::ObservePreferencesUseCase)
-    factoryOf(::SetThemeModeUseCase)
-    factoryOf(::SetLanguageUseCase)
-    factoryOf(::SetDynamicColorUseCase)
-}
+val settingsDomainModule =
+    module {
+        factoryOf(::ObservePreferencesUseCase)
+        factoryOf(::SetThemeModeUseCase)
+        factoryOf(::SetLanguageUseCase)
+        factoryOf(::SetDynamicColorUseCase)
+    }

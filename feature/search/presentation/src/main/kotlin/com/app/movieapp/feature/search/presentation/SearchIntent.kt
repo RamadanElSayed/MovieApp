@@ -3,7 +3,6 @@ package com.app.movieapp.feature.search.presentation
 import com.app.movieapp.common.presentation.mvi.Intent
 import com.app.movieapp.feature.search.presentation.model.SearchResultUiModel
 
-/** Everything the search screen (or its async work) can ask the ViewModel to do. */
 sealed interface SearchIntent : Intent {
     data class QueryChanged(val query: String) : SearchIntent
     data object Retry : SearchIntent

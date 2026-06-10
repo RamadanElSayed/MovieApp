@@ -1,5 +1,7 @@
-// Top-level build file. Plugins are declared here (apply false) so modules can apply them by alias.
-// Project-wide build behaviour is shared through the convention plugins in :build-logic.
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.extensions.DetektExtension
+import org.jlleitschuh.gradle.ktlint.KtlintExtension
+
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
@@ -9,4 +11,27 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.room) apply false
+    alias(libs.plugins.detekt) apply false
+    alias(libs.plugins.ktlint) apply false
+}
+
+subprojects {
+    apply(plugin = "io.gitlab.arturbosch.detekt")
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+
+    extensions.configure<DetektExtension> {
+        buildUponDefaultConfig = true
+        parallel = true
+        config.setFrom(rootProject.files("config/detekt/detekt.yml"))
+        baseline = rootProject.file("config/detekt/baseline.xml")
+    }
+
+    extensions.configure<KtlintExtension> {
+        version.set("1.5.0")
+        android.set(true)
+    }
+
+    tasks.withType<Detekt>().configureEach {
+        jvmTarget = "17"
+    }
 }

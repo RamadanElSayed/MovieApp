@@ -9,7 +9,6 @@ android {
 }
 
 dependencies {
-    // Layer-matched: common-presentation may use core:design-system and common:domain.
     api(project(":common:domain"))
     implementation(project(":core:design-system"))
 

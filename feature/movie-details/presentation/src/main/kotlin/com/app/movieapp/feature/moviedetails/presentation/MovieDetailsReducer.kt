@@ -13,8 +13,7 @@ class MovieDetailsReducer : Reducer<MovieDetailsState, MovieDetailsIntent> {
                 state.copy(isLoading = false, error = intent.message)
             is MovieDetailsIntent.FavoriteChanged ->
                 state.copy(isFavorite = intent.isFavorite)
-            // Pure side-effect: the actual toggle happens in the ViewModel; the favourites flow
-            // then emits FavoriteChanged, which updates state.
+
             MovieDetailsIntent.ToggleFavorite -> state
         }
 }

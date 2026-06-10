@@ -63,14 +63,6 @@ private val DarkColors = darkColorScheme(
     onError = md_dark_onError,
 )
 
-/**
- * The single Material 3 theme for the whole app.
- *
- * - Reacts to the user's [themeMode] (Light / Dark / Follow-System).
- * - Optionally uses Material You [dynamicColor] on Android 12+, falling back to the brand palette.
- * - Layout direction (RTL for Arabic) is driven by the Activity locale and flows automatically into
- *   `LocalLayoutDirection`; all components use start/end so they mirror correctly.
- */
 @Composable
 fun MovieAppTheme(
     themeMode: ThemeMode = ThemeMode.SYSTEM,
@@ -104,6 +96,5 @@ fun MovieAppTheme(
     }
 }
 
-/** Ergonomic accessor: `MaterialTheme.spacing.md`. */
 val MaterialTheme.spacing: Spacing
     @Composable get() = LocalSpacing.current

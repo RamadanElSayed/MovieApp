@@ -1,0 +1,51 @@
+build:
+  maxIssues: 0
+
+complexity:
+  LongMethod:
+    active: true
+    threshold: 80
+    ignoreAnnotated: ['Composable']
+  LongParameterList:
+    active: false
+  TooManyFunctions:
+    active: false
+  CyclomaticComplexMethod:
+    active: true
+    threshold: 20
+
+style:
+  MagicNumber:
+    active: false
+  UnusedPrivateMember:
+    active: true
+  ForbiddenComment:
+    active: false
+  ReturnCount:
+    active: true
+    max: 4
+  MaxLineLength:
+    active: true
+    maxLineLength: 140
+  WildcardImport:
+    active: true
+
+performance:
+  SpreadOperator:
+    active: false
+
+naming:
+  FunctionNaming:
+    active: true
+    ignoreAnnotated: ['Composable']
+  TopLevelPropertyNaming:
+    active: true
+    constantPattern: '[A-Z][A-Za-z0-9]*|[A-Z][_A-Z0-9]*'
+
+exceptions:
+  TooGenericExceptionCaught:
+    active: false
+  SwallowedException:
+    active: false
+  ThrowingExceptionInMain:
+    active: false

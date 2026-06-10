@@ -11,10 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-/**
- * Shared first-load placeholder: a non-scrollable grid of shimmering [PosterCardPlaceholder]s.
- * Used by Home, Search and Favorites so the loading look is identical everywhere.
- */
 @Composable
 fun PosterGridPlaceholder(
     modifier: Modifier = Modifier,

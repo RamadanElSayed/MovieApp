@@ -9,7 +9,6 @@ import com.app.movieapp.feature.moviedetails.presentation.MovieDetailsRoute
 
 class MovieDetailsEntryProvider : FeatureEntryProvider {
     override fun EntryProviderScope<NavKey>.install(backStack: NavBackStack<NavKey>) {
-        // The typed key carries the id — no string routes, no manual arg parsing.
         entry<MovieDetails> { key ->
             MovieDetailsRoute(
                 movieId = key.id,

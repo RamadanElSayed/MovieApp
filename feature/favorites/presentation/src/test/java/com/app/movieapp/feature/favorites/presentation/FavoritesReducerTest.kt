@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class FavoritesReducerTest {
-
     private val reducer = FavoritesReducer()
     private val initial = FavoritesState()
 
@@ -33,7 +32,7 @@ class FavoritesReducerTest {
     fun `empty is true only after loading finishes with no items`() {
         val loaded = reducer.reduce(initial, FavoritesIntent.ItemsLoaded(emptyList()))
         assertTrue(loaded.isEmpty)
-        assertFalse(initial.isEmpty) // still loading -> not "empty"
+        assertFalse(initial.isEmpty)
     }
 
     @Test

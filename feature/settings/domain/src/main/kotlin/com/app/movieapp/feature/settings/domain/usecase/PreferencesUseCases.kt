@@ -15,17 +15,20 @@ class ObservePreferencesUseCase(
     override fun invoke(params: Unit): Flow<UserPreferences> = repository.preferences
 }
 
-class SetThemeModeUseCase(private val repository: UserPreferencesRepository) :
-    UseCase<ThemeMode, Unit> {
+class SetThemeModeUseCase(
+    private val repository: UserPreferencesRepository,
+) : UseCase<ThemeMode, Unit> {
     override suspend fun invoke(params: ThemeMode) = repository.setThemeMode(params)
 }
 
-class SetLanguageUseCase(private val repository: UserPreferencesRepository) :
-    UseCase<AppLanguage, Unit> {
+class SetLanguageUseCase(
+    private val repository: UserPreferencesRepository,
+) : UseCase<AppLanguage, Unit> {
     override suspend fun invoke(params: AppLanguage) = repository.setLanguage(params)
 }
 
-class SetDynamicColorUseCase(private val repository: UserPreferencesRepository) :
-    UseCase<DynamicColor, Unit> {
+class SetDynamicColorUseCase(
+    private val repository: UserPreferencesRepository,
+) : UseCase<DynamicColor, Unit> {
     override suspend fun invoke(params: DynamicColor) = repository.setDynamicColor(params)
 }

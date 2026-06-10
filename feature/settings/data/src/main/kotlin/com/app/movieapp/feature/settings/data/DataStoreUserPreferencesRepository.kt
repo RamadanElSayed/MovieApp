@@ -17,14 +17,9 @@ import kotlinx.coroutines.flow.map
 
 private val Context.dataStore by preferencesDataStore(name = "user_prefs")
 
-/**
- * DataStore-backed implementation of the [UserPreferencesRepository] contract. settings OWNS this;
- * `:app` / `core:design-system` consume the contract to drive theme + locale, never this class.
- */
 class DataStoreUserPreferencesRepository(
     context: Context,
 ) : UserPreferencesRepository {
-
     private val store: DataStore<Preferences> = context.dataStore
 
     override val preferences: Flow<UserPreferences> = store.data.map { prefs ->

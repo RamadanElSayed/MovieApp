@@ -26,7 +26,6 @@ class SearchViewModel(
     private val queryFlow = MutableStateFlow("")
 
     init {
-        // Debounce keystrokes so we don't fire a request on every character.
         queryFlow
             .debounce(DEBOUNCE_MS)
             .distinctUntilChanged()

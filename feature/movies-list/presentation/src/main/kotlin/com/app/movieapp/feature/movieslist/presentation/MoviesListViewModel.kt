@@ -22,11 +22,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 
-/**
- * MVI ViewModel for the movies list. The paged list is exposed as a dedicated
- * `Flow<PagingData<MovieUiModel>>` (Paging owns its LoadState); screen-level concerns
- * (selected category / refresh / offline / fatal error) live in [MoviesListState].
- */
 class MoviesListViewModel(
     observePagedMovies: ObservePagedMoviesUseCase,
     private val refreshMovies: RefreshMoviesUseCase,
@@ -37,16 +32,8 @@ class MoviesListViewModel(
     initialState = MoviesListState(),
     reducer = MoviesListReducer(),
 ) {
-
-    /** The currently selected category — switching it re-pages from the right cache. */
     private val selectedCategory = MutableStateFlow(MovieCategory.POPULAR)
 
-    /**
-     * Paged movies for the selected category, joined with the favourites set and mapped to UI models.
-     *
-     * IMPORTANT: `cachedIn` is applied BEFORE `combine` so the PagingData can be re-collected when
-     * favourites change — applying it after combine collects the page flow twice and crashes.
-     */
     val pagedMovies: Flow<PagingData<MovieUiModel>> =
         selectedCategory
             .flatMapLatest { category -> observePagedMovies(category) }
@@ -61,7 +48,7 @@ class MoviesListViewModel(
 
     override fun handleIntent(intent: MoviesListIntent) {
         when (intent) {
-            MoviesListIntent.Load -> Unit // Paging auto-loads from the cache.
+            MoviesListIntent.Load -> Unit
             MoviesListIntent.Refresh, MoviesListIntent.Retry -> refresh()
             is MoviesListIntent.SelectCategory -> selectedCategory.value = intent.category
             is MoviesListIntent.OpenDetails ->
@@ -69,7 +56,7 @@ class MoviesListViewModel(
             is MoviesListIntent.ToggleFavorite -> toggleFavorite(intent.movieId)
             is MoviesListIntent.ConnectivityChanged,
             is MoviesListIntent.RefreshFinished,
-            -> Unit // pure state transitions handled by the reducer
+            -> Unit
         }
     }
 
@@ -78,7 +65,6 @@ class MoviesListViewModel(
             when (val result = refreshMovies(selectedCategory.value)) {
                 is Outcome.Success -> sendIntent(MoviesListIntent.RefreshFinished(null))
                 is Outcome.Failure -> {
-                    // Soft failure: cache is still shown; surface a one-shot snackbar.
                     sendIntent(MoviesListIntent.RefreshFinished(null))
                     sendEffect(MoviesListEffect.ShowSnackbar(result.error.toMessage(resources)))
                 }

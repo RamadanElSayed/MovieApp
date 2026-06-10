@@ -40,11 +40,6 @@ import com.app.movieapp.core.designsystem.theme.spacing
 
 private const val TMDB_API_SETTINGS_URL = "https://www.themoviedb.org/settings/api"
 
-/**
- * Shown at the composition root when no TMDB token is configured (`NetworkConstants.HAS_ACCESS_TOKEN`
- * is false) — the real reason "couldn't load movies" appears. Explains the one-time fix, deep-links
- * to TMDB to grab a key, and lets the user [onContinue] into the app regardless.
- */
 @Composable
 fun ApiKeySetupScreen(
     onContinue: () -> Unit,
@@ -56,7 +51,7 @@ fun ApiKeySetupScreen(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .safeDrawingPadding() // keep content clear of the status & navigation bars
+            .safeDrawingPadding()
             .verticalScroll(rememberScrollState())
             .padding(MaterialTheme.spacing.lg),
         horizontalAlignment = Alignment.CenterHorizontally,

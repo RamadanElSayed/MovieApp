@@ -5,7 +5,8 @@ import com.app.movieapp.feature.favorites.domain.usecase.ToggleFavoriteUseCase
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
-val favoritesDomainModule = module {
-    factoryOf(::ObserveFavoriteMoviesUseCase)
-    factoryOf(::ToggleFavoriteUseCase)
-}
+val favoritesDomainModule =
+    module {
+        factoryOf(::ObserveFavoriteMoviesUseCase)
+        factoryOf(::ToggleFavoriteUseCase)
+    }

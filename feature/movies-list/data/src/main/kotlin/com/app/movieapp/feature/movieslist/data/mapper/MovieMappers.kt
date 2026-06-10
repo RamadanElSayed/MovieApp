@@ -6,12 +6,6 @@ import com.app.movieapp.core.network.NetworkConstants
 import com.app.movieapp.feature.movieslist.data.remote.dto.MovieDto
 import com.app.movieapp.feature.movieslist.domain.model.Movie
 
-/**
- * Dedicated, one-directional mappers — one hop each, each independently unit-tested.
- *   DTO --(network->db)--> Entity --(db->domain)--> Movie --(domain->contract)--> MovieSummary
- */
-
-/** Network -> DB. [category] partitions the cache; [page]/[position] preserve API ordering. */
 fun MovieDto.toEntity(category: String, page: Int, position: Int): MovieEntity = MovieEntity(
     id = id,
     category = category,
@@ -26,7 +20,6 @@ fun MovieDto.toEntity(category: String, page: Int, position: Int): MovieEntity =
     positionInPage = position,
 )
 
-/** DB -> Domain. Builds fully-qualified image URLs so the domain is UI-agnostic but ready to use. */
 fun MovieEntity.toDomain(): Movie = Movie(
     id = id,
     title = title,
@@ -38,7 +31,6 @@ fun MovieEntity.toDomain(): Movie = Movie(
     popularity = popularity,
 )
 
-/** Domain -> Contract (cross-feature shared model). */
 fun Movie.toSummary(): MovieSummary = MovieSummary(
     id = id,
     title = title,

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 
 class OutcomeTest {
-
     @Test
     fun `map transforms success data`() {
         val result = Outcome.Success(2).map { it * 10 }

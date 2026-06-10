@@ -8,6 +8,6 @@ android {
 
 dependencies {
     implementation(project(":feature:settings:domain"))
-    // AppCompat provides the per-app locale API (AppCompatDelegate.setApplicationLocales).
+
     implementation(libs.androidx.appcompat)
 }

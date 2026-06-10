@@ -8,11 +8,9 @@ import com.app.movieapp.core.database.entity.MovieRemoteKeyEntity
 
 @Dao
 interface MovieRemoteKeyDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertAll(keys: List<MovieRemoteKeyEntity>)
 
-    /** The most recently fetched key within a category — drives the next APPEND page. */
     @Query("SELECT * FROM movie_remote_keys WHERE category = :category ORDER BY lastUpdated DESC LIMIT 1")
     suspend fun latest(category: String): MovieRemoteKeyEntity?
 

@@ -36,10 +36,6 @@ import com.app.movieapp.feature.movieslist.presentation.model.MovieUiModel
 import kotlin.math.absoluteValue
 import kotlinx.coroutines.delay
 
-/**
- * A featured, auto-advancing backdrop carousel for the top of the movies list. Each page is a
- * cinematic 16:9 backdrop with a scrim, title, year and rating; tapping opens details.
- */
 @Composable
 fun HeroCarousel(
     movies: List<MovieUiModel>,
@@ -49,7 +45,6 @@ fun HeroCarousel(
     if (movies.isEmpty()) return
     val pagerState = rememberPagerState(pageCount = { movies.size })
 
-    // Auto-advance every few seconds (wraps around).
     LaunchedEffectAutoAdvance(pageCount = movies.size) {
         val next = (pagerState.currentPage + 1) % movies.size
         pagerState.animateScrollToPage(next)
@@ -62,7 +57,7 @@ fun HeroCarousel(
             contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 12.dp),
         ) { page ->
             val movie = movies[page]
-            // Distance of this page from the settled centre (0 = centered, 1 = a full page away).
+
             val pageOffset = ((pagerState.currentPage - page) +
                 pagerState.currentPageOffsetFraction).absoluteValue
             Box(
@@ -70,7 +65,6 @@ fun HeroCarousel(
                     .fillMaxWidth()
                     .aspectRatio(16f / 9f)
                     .graphicsLayer {
-                        // Neighbouring pages shrink + fade slightly for a depth/parallax feel.
                         val scale = lerp(0.88f, 1f, 1f - pageOffset.coerceIn(0f, 1f))
                         scaleX = scale
                         scaleY = scale
@@ -124,7 +118,6 @@ fun HeroCarousel(
             }
         }
 
-        // Page indicator.
         Row(
             Modifier
                 .fillMaxWidth()
@@ -149,7 +142,6 @@ fun HeroCarousel(
     }
 }
 
-/** Small helper so the auto-advance loop reads cleanly at the call-site. */
 @Composable
 private fun LaunchedEffectAutoAdvance(pageCount: Int, advance: suspend () -> Unit) {
     androidx.compose.runtime.LaunchedEffect(pageCount) {

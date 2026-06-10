@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class MovieMappersTest {
-
     private val dto = MovieDto(
         id = 42,
         title = "Inception",

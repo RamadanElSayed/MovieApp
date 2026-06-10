@@ -31,7 +31,7 @@ class SettingsViewModel(
                 viewModelScope.launch { setDynamicColor(intent.value) }
             is SettingsIntent.SelectLanguage -> {
                 viewModelScope.launch { setLanguage(intent.language) }
-                // Apply the per-app locale immediately (Activity handles AppCompatDelegate).
+
                 sendEffect(SettingsEffect.ApplyLanguage(intent.language.tag))
             }
             is SettingsIntent.PreferencesLoaded -> Unit

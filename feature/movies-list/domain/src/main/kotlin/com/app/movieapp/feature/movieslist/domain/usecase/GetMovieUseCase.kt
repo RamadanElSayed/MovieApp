@@ -5,7 +5,6 @@ import com.app.movieapp.common.domain.usecase.UseCase
 import com.app.movieapp.feature.movieslist.domain.model.Movie
 import com.app.movieapp.feature.movieslist.domain.repository.MoviesRepository
 
-/** Fetches a single movie (used by the contract implementation other features consume). */
 class GetMovieUseCase(
     private val repository: MoviesRepository,
 ) : UseCase<Int, Outcome<Movie>> {

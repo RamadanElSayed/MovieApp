@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoriteMovieDao {
-
     @Query("SELECT movieId FROM favorite_movies")
     fun observeFavoriteIds(): Flow<List<Int>>
 

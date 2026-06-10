@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class SettingsReducerTest {
-
     private val reducer = SettingsReducer()
     private val initial = SettingsState()
 

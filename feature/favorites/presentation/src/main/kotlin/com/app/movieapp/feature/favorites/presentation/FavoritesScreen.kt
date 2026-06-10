@@ -75,7 +75,7 @@ internal fun FavoritesScreen(
                             posterUrl = movie.posterUrl,
                             title = movie.title,
                             ratingLabel = movie.ratingLabel,
-                            // Heart is filled here; tapping removes from favourites.
+
                             isFavorite = true,
                             onToggleFavorite = { onIntent(FavoritesIntent.Remove(movie.id)) },
                             onClick = { onIntent(FavoritesIntent.OpenDetails(movie.id)) },

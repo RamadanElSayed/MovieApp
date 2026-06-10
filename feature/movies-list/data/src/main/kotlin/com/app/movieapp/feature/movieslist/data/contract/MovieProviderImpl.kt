@@ -9,15 +9,9 @@ import com.app.movieapp.feature.movieslist.domain.repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-/**
- * movies-list OWNS and IMPLEMENTS the [MovieProvider] contract. Other features (favorites,
- * movie-details) consume the interface via Koin without ever depending on this module.
- * `internal` so nothing outside this module can reference the implementation type directly.
- */
 internal class MovieProviderImpl(
     private val repository: MoviesRepository,
 ) : MovieProvider {
-
     override suspend fun getMovie(id: Int): Outcome<MovieSummary> =
         repository.getMovie(id).map { it.toSummary() }
 

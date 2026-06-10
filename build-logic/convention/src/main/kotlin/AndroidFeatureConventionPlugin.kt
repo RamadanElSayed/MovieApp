@@ -4,15 +4,6 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.project
 
-/**
- * Convention for a feature's **presentation** module.
- *
- * Wires the layer-matched dependencies the strict module rules allow a presentation layer to use:
- *   presentation -> common:presentation, core:design-system, core:navigation, core:contract
- *
- * It deliberately does NOT grant access to common:data / common:domain / core:network /
- * core:database — those belong to the data/domain layers and live in sibling modules.
- */
 class AndroidFeatureConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) = with(target) {
         with(pluginManager) {

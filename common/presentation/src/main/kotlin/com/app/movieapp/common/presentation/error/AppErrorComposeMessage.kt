@@ -6,10 +6,6 @@ import com.app.movieapp.common.domain.error.AppError
 import com.app.movieapp.common.domain.error.AppErrorException
 import com.app.movieapp.common.presentation.R
 
-/**
- * Composable twin of [toMessage] for places that have a `@Composable` scope (and a `Throwable`)
- * rather than a [ResourceProvider] — e.g. mapping a Paging `LoadState.Error` to display text.
- */
 @Composable
 fun AppError.asMessage(): String = when (this) {
     AppError.Network -> stringResource(R.string.error_no_connection)
@@ -21,10 +17,6 @@ fun AppError.asMessage(): String = when (this) {
     is AppError.Unknown -> stringResource(R.string.error_generic)
 }
 
-/**
- * Best-effort localized text for any [Throwable]. Unwraps an [AppErrorException] (as produced by the
- * data layer / RemoteMediator) into its precise reason, falling back to [fallback] otherwise.
- */
 @Composable
 fun Throwable?.toUserMessage(fallback: String): String =
     (this as? AppErrorException)?.error?.asMessage() ?: fallback

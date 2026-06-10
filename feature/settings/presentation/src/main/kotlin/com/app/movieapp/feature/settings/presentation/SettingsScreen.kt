@@ -36,7 +36,6 @@ fun SettingsRoute(viewModel: SettingsViewModel = koinViewModel()) {
         viewModel.effect.collect { effect ->
             when (effect) {
                 is SettingsEffect.ApplyLanguage ->
-                    // In-app language switch without changing the system language.
                     AppCompatDelegate.setApplicationLocales(
                         LocaleListCompat.forLanguageTags(effect.tag),
                     )
@@ -56,7 +55,6 @@ internal fun SettingsScreen(
         topBar = { TopAppBar(title = { Text(stringResource(R.string.settings_title)) }) },
     ) { padding ->
         Column(Modifier.fillMaxSize().padding(padding).padding(MaterialTheme.spacing.md)) {
-
             SectionHeader(stringResource(R.string.settings_theme))
             ThemeMode.entries.forEach { mode ->
                 RadioRow(

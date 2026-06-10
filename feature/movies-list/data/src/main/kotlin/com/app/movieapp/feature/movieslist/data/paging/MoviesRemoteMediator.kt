@@ -15,13 +15,6 @@ import com.app.movieapp.feature.movieslist.data.remote.MoviesApi
 import com.app.movieapp.feature.movieslist.domain.model.MovieCategory
 import kotlinx.coroutines.CancellationException
 
-/**
- * Offline-first paging for a single [category]: the UI pages from Room; this mediator fetches network
- * pages and writes them THROUGH to Room. On [LoadType.REFRESH] that category's cache is replaced;
- * otherwise pages are appended. Each category keeps its own rows + paging keys.
- *
- * @param now a time supplier (injected for testability; avoids a hard System.currentTimeMillis dep).
- */
 @OptIn(ExperimentalPagingApi::class)
 class MoviesRemoteMediator(
     private val category: MovieCategory,
@@ -29,7 +22,6 @@ class MoviesRemoteMediator(
     private val database: MovieAppDatabase,
     private val now: () -> Long = { System.currentTimeMillis() },
 ) : RemoteMediator<Int, MovieEntity>() {
-
     private val movieDao = database.movieDao()
     private val keyDao = database.movieRemoteKeyDao()
     private val categoryKey = category.name
@@ -41,7 +33,7 @@ class MoviesRemoteMediator(
         return try {
             val page: Int = when (loadType) {
                 LoadType.REFRESH -> FIRST_PAGE
-                // No paging "before" — the list only grows forward.
+
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
                     val last = keyDao.latest(categoryKey)
@@ -75,8 +67,6 @@ class MoviesRemoteMediator(
         } catch (e: CancellationException) {
             throw e
         } catch (e: Throwable) {
-            // Surface the failure to Paging's LoadState as a TYPED error (cached pages remain
-            // intact — soft failure). The UI unwraps this for a precise, localized message.
             MediatorResult.Error(AppErrorException(e.toAppError(), cause = e))
         }
     }

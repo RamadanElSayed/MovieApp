@@ -14,10 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 
-/**
- * An animated, theme-aware shimmer [Brush] for loading placeholders. Sweeps a soft highlight across
- * a [MaterialTheme.colorScheme.surfaceVariant] base — far classier than a spinner for content grids.
- */
 @Composable
 fun rememberShimmerBrush(): Brush {
     val transition = rememberInfiniteTransition(label = "shimmer")
@@ -40,7 +36,6 @@ fun rememberShimmerBrush(): Brush {
     )
 }
 
-/** A rectangular shimmering placeholder block. Give it a fixed/aspect-ratio size via [modifier]. */
 @Composable
 fun ShimmerBox(modifier: Modifier = Modifier) {
     Box(modifier = modifier.background(rememberShimmerBrush()))

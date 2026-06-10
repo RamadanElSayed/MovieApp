@@ -10,9 +10,8 @@ android {
 }
 
 dependencies {
-    // Nav3 runtime gives us NavKey / NavBackStack / EntryProviderBuilder.
     api(libs.androidx.navigation3.runtime)
-    // Nav3 UI provides LocalNavAnimatedContentScope, used by the shared-element helper.
+
     implementation(libs.androidx.navigation3.ui)
     implementation(libs.kotlinx.serialization.json)
 }

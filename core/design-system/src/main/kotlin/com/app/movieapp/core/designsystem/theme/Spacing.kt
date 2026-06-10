@@ -4,7 +4,6 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-/** Spacing design tokens, exposed via a CompositionLocal so screens never hardcode dp values. */
 data class Spacing(
     val none: Dp = 0.dp,
     val xs: Dp = 4.dp,

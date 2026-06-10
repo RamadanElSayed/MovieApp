@@ -3,7 +3,6 @@ package com.app.movieapp.feature.movieslist.presentation
 import com.app.movieapp.common.presentation.mvi.Intent
 import com.app.movieapp.feature.movieslist.domain.model.MovieCategory
 
-/** Everything the movies-list screen (or its async work) can ask the ViewModel to do. */
 sealed interface MoviesListIntent : Intent {
     data object Load : MoviesListIntent
     data object Refresh : MoviesListIntent

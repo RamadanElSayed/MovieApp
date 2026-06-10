@@ -8,10 +8,9 @@ android {
 }
 
 dependencies {
-    // Needs only the shared ThemeMode/DynamicColor enums from the contract (pure models).
     implementation(project(":core:contract"))
     implementation(libs.androidx.compose.material3.adaptive)
-    // Shared image-loading for reusable poster components (PosterCard, backdrops).
+
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
 }

@@ -54,11 +54,6 @@ private const val HERO_COUNT = 6
 
 private enum class MoviesPhase { Loading, Error, Empty, Content }
 
-/**
- * Stateful entry point. Collects effects, routes navigation to [onOpenDetails], and renders the
- * loading (shimmer) / content / empty / error (retry) / offline states with a featured carousel
- * and pull-to-refresh.
- */
 @Composable
 fun MoviesListRoute(
     onOpenDetails: (Int) -> Unit,
@@ -120,8 +115,6 @@ internal fun MoviesListScreen(
 
             val refresh = movies.loadState.refresh
 
-            // The pull-to-refresh spinner must reflect ONLY a user pull — not the automatic refresh
-            // that Paging runs on first load or when switching category tabs. Track it explicitly.
             var userRefreshing by rememberSaveable { mutableStateOf(false) }
             LaunchedEffect(refresh) {
                 if (userRefreshing && refresh !is LoadState.Loading) userRefreshing = false
@@ -134,13 +127,10 @@ internal fun MoviesListScreen(
                 else -> MoviesPhase.Content
             }
 
-            // Crossfade between the high-level phases for a smooth load experience.
             Crossfade(targetState = phase, label = "moviesPhase") { p ->
                 when (p) {
-                    // First load, nothing cached yet -> shimmer grid (classier than a spinner).
                     MoviesPhase.Loading -> PosterGridPlaceholder(minItemWidth = 160.dp, count = 12)
 
-                    // Hard error with no cache -> full-screen retry, with the REAL cause when known.
                     MoviesPhase.Error -> ErrorState(
                         message = (refresh as? LoadState.Error)?.error.toUserMessage(
                             fallback = stringResource(R.string.movies_error),
@@ -149,12 +139,10 @@ internal fun MoviesListScreen(
                         onRetry = { movies.retry() },
                     )
 
-                    // Load succeeded but the cache is genuinely empty.
                     MoviesPhase.Empty -> EmptyState(
                         message = stringResource(R.string.movies_empty),
                     )
 
-                    // Content (offline-aware) + pull-to-refresh (only on an actual user pull).
                     MoviesPhase.Content -> PullToRefreshBox(
                         isRefreshing = userRefreshing,
                         onRefresh = {
@@ -176,7 +164,6 @@ private fun MoviesGrid(
     movies: LazyPagingItems<MovieUiModel>,
     onIntent: (MoviesListIntent) -> Unit,
 ) {
-    // A non-loading peek of the first items powers the featured carousel.
     val heroItems = remember(movies.itemSnapshotList) {
         (0 until minOf(HERO_COUNT, movies.itemCount)).mapNotNull { movies.peek(it) }
     }
@@ -212,7 +199,7 @@ private fun MoviesGrid(
                     isFavorite = movie.isFavorite,
                     onToggleFavorite = { onIntent(MoviesListIntent.ToggleFavorite(movie.id)) },
                     onClick = { onIntent(MoviesListIntent.OpenDetails(movie.id)) },
-                    // Shared element: this poster morphs into the details poster (matching key).
+
                     modifier = Modifier
                         .animateItem()
                         .sharedMovieElement(moviePosterKey(movie.id)),

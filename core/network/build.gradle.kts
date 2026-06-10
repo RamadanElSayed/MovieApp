@@ -5,12 +5,11 @@ plugins {
     alias(libs.plugins.movieapp.koin)
 }
 
-// Read TMDB secrets from local.properties (never commit them). Falls back to empty strings so the
-// project still configures without a key (network calls will simply fail with Unauthorized).
-val localProps = Properties().apply {
-    val f = rootProject.file("local.properties")
-    if (f.exists()) f.inputStream().use { load(it) }
-}
+val localProps =
+    Properties().apply {
+        val f = rootProject.file("local.properties")
+        if (f.exists()) f.inputStream().use { load(it) }
+    }
 
 android {
     namespace = "com.app.movieapp.core.network"
@@ -29,7 +28,7 @@ android {
             "TMDB_IMAGE_BASE_URL",
             "\"${localProps.getProperty("TMDB_IMAGE_BASE_URL", "https://image.tmdb.org/t/p/")}\"",
         )
-        // v4 read access token (Bearer). Prefer this over the legacy api_key query param.
+
         buildConfigField(
             "String",
             "TMDB_ACCESS_TOKEN",

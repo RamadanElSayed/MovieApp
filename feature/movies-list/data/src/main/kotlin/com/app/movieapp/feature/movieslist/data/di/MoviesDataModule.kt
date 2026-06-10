@@ -9,10 +9,6 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.bind
 import org.koin.dsl.module
 
-/**
- * Data-layer wiring. Binds the repository to its contract and — crucially — binds
- * [MovieProviderImpl] to the cross-feature [MovieProvider] contract so other features can consume it.
- */
 val moviesDataModule = module {
     singleOf(::MoviesApi)
     singleOf(::MoviesRepositoryImpl) { bind<MoviesRepository>() }

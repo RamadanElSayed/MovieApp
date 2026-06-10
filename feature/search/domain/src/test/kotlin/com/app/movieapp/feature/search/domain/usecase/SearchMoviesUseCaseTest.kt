@@ -9,9 +9,11 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class SearchMoviesUseCaseTest {
-
-    private class FakeRepo(val result: Outcome<List<SearchMovie>>) : SearchRepository {
+    private class FakeRepo(
+        val result: Outcome<List<SearchMovie>>,
+    ) : SearchRepository {
         var called = false
+
         override suspend fun searchMovies(query: String): Outcome<List<SearchMovie>> {
             called = true
             return result
@@ -19,25 +21,27 @@ class SearchMoviesUseCaseTest {
     }
 
     @Test
-    fun `blank query short-circuits without hitting the repository`() = runTest {
-        val repo = FakeRepo(Outcome.Success(emptyList()))
-        val useCase = SearchMoviesUseCase(repo)
+    fun `blank query short-circuits without hitting the repository`() =
+        runTest {
+            val repo = FakeRepo(Outcome.Success(emptyList()))
+            val useCase = SearchMoviesUseCase(repo)
 
-        val result = useCase("   ")
+            val result = useCase("   ")
 
-        assertEquals(Outcome.Success(emptyList<SearchMovie>()), result)
-        assertTrue(!repo.called, "repository must not be called for blank query")
-    }
+            assertEquals(Outcome.Success(emptyList<SearchMovie>()), result)
+            assertTrue(!repo.called, "repository must not be called for blank query")
+        }
 
     @Test
-    fun `non-blank query delegates to repository`() = runTest {
-        val expected = listOf(SearchMovie(1, "A", "", 7.0))
-        val repo = FakeRepo(Outcome.Success(expected))
-        val useCase = SearchMoviesUseCase(repo)
+    fun `non-blank query delegates to repository`() =
+        runTest {
+            val expected = listOf(SearchMovie(1, "A", "", 7.0))
+            val repo = FakeRepo(Outcome.Success(expected))
+            val useCase = SearchMoviesUseCase(repo)
 
-        val result = useCase("matrix")
+            val result = useCase("matrix")
 
-        assertEquals(Outcome.Success(expected), result)
-        assertTrue(repo.called)
-    }
+            assertEquals(Outcome.Success(expected), result)
+            assertTrue(repo.called)
+        }
 }

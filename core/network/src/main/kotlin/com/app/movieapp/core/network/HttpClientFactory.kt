@@ -19,11 +19,9 @@ import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-/** Single place that constructs the Ktor [HttpClient]; injected as a singleton by Koin. */
 object HttpClientFactory {
-
     val json: Json = Json {
-        ignoreUnknownKeys = true      // TMDB returns many fields we don't model
+        ignoreUnknownKeys = true
         explicitNulls = false
         coerceInputValues = true
         isLenient = true
@@ -34,7 +32,6 @@ object HttpClientFactory {
         accessToken: String = NetworkConstants.ACCESS_TOKEN,
         enableLogging: Boolean = true,
     ): HttpClient = HttpClient(OkHttp) {
-        // Loud, early diagnostic: without a token EVERY request 401s ("couldn't load movies").
         if (accessToken.isBlank()) {
             Log.e(
                 AndroidHttpLogger.TAG,
@@ -44,7 +41,7 @@ object HttpClientFactory {
             )
         }
 
-        expectSuccess = true          // non-2xx throws ClientRequestException/ServerResponseException
+        expectSuccess = true
 
         install(ContentNegotiation) { json(json) }
 
@@ -61,14 +58,13 @@ object HttpClientFactory {
 
         if (enableLogging) {
             install(Logging) {
-                logger = AndroidHttpLogger     // -> Logcat, filterable by the "TMDB-HTTP" tag
-                level = LogLevel.ALL           // method, URL, headers AND request/response bodies
-                // Never print the bearer token to Logcat.
+                logger = AndroidHttpLogger
+                level = LogLevel.ALL
+
                 sanitizeHeader { header -> header == HttpHeaders.Authorization }
             }
         }
 
-        // TMDB v4 bearer auth.
         install(Auth) {
             bearer { loadTokens { BearerTokens(accessToken, refreshToken = "") } }
         }

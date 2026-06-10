@@ -22,11 +22,6 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.compose.AsyncImagePainter
 
-/**
- * Image loader with graceful states: a shimmer while loading and a movie-icon fallback on
- * error/empty URL. Used by [PosterCard] and detail backdrops so imagery never "pops" or shows a
- * blank box.
- */
 @Composable
 fun PosterImage(
     url: String,
@@ -41,7 +36,6 @@ fun PosterImage(
             ShimmerBox(Modifier.fillMaxSize())
         }
 
-        // Crossfade the bitmap in once it's ready instead of letting it pop.
         val imageAlpha by animateFloatAsState(
             targetValue = if (state is AsyncImagePainter.State.Success) 1f else 0f,
             animationSpec = tween(durationMillis = 350),

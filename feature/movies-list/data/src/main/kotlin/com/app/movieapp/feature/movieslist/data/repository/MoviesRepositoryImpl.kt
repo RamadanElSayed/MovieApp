@@ -19,18 +19,11 @@ import com.app.movieapp.feature.movieslist.domain.repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-/**
- * Offline-first repository. Room is the single source of truth:
- *  - [pagedMovies] pages FROM Room, with [MoviesRemoteMediator] refilling the cache from the API.
- *  - [observeMovie] reads reactively FROM Room.
- *  - the network result is mapped DTO->Entity and written THROUGH to Room; it never reaches the UI.
- */
 @OptIn(ExperimentalPagingApi::class)
 class MoviesRepositoryImpl(
     private val api: MoviesApi,
     private val database: MovieAppDatabase,
 ) : MoviesRepository {
-
     private val movieDao = database.movieDao()
 
     override fun pagedMovies(category: MovieCategory): Flow<PagingData<Movie>> = Pager(
@@ -44,8 +37,7 @@ class MoviesRepositoryImpl(
 
     override suspend fun getMovie(id: Int): Outcome<Movie> {
         movieDao.findById(id)?.let { return Outcome.Success(it.toDomain()) }
-        // Not cached -> fetch, write through (under the DETAIL bucket so it doesn't pollute any
-        // list), then read back from the source of truth.
+
         return safeApiCall { api.getMovie(id) }.map { dto ->
             val entity = dto.toEntity(category = DETAIL_CATEGORY, page = 0, position = 0)
             movieDao.upsertAll(listOf(entity))
@@ -56,7 +48,7 @@ class MoviesRepositoryImpl(
     override suspend fun refresh(category: MovieCategory): Outcome<Unit> = safeApiCall {
         val response = api.getCategory(category.apiPath, 1)
         val entities = response.results.mapIndexed { i, dto -> dto.toEntity(category.name, 1, i) }
-        // Write-through refresh; existing cache stays intact if the call throws (soft failure).
+
         movieDao.upsertAll(entities)
     }
 
